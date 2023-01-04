@@ -11,6 +11,35 @@ The intended way to run this program is to register a task with Task Manager and
 run everytime after a guest restarts.
 
 
+# How to Create Task
+
+Open "Task Scheduler", click "Create Task..." on the right side.  The
+important fields are listed below:
+
+- General
+	* Name: anything
+	* Security options: Run whether user is logged on or not.
+	* Check "Run with highest priviledges".
+- Triggers, click "New...":
+	* Begin the task: On an event
+	* Settings: Basic
+	* Log: Microsoft-Windows-Hyper-V-Worker/Admin
+	* Source: Hyper-V-Worker
+	* Event ID: 18500
+- Actions, click New...
+	* Action: Start a program.
+	* Program/script: select this program.
+	* Add arguments (optional): --host-fmt vm_{}
+	* Start in: any directory, the program generates a temporary file.
+
+The arguments "--host-fmt vm_{}" prepends "vm_" to the guest name for
+hostname.
+
+
+
+
+
+
 
 
 
