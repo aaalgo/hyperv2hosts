@@ -96,7 +96,7 @@ int main (int argc, char *argv[]) {
 
     (*os) << "# " << magic << " Updated at " << get_time_string();
     for (auto const &e: entries) {
-        (*os) << fmt::format(host_fmt, e.name) << "\t" << e.ip << " # " << magic << endl;
+        (*os) << e.ip << "\t" << fmt::format(host_fmt, e.name) << " # " << magic << endl;
     }
 
     if (!dry) {
