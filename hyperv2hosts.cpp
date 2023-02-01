@@ -18,7 +18,7 @@ struct Entry {
 void query_hyperv (vector<Entry> *entries, string const &temp_path) {
     // ideally we want to get rid of the temp file
     // by using something similar to the posix popen
-    string cmd = fmt::format("powershell.exe  -command \"Get-VMNetworkAdapter -VMName linux | Select VMName, IPAddresses\" > {}", temp_path);
+    string cmd = fmt::format("powershell.exe  -command \"Get-VMNetworkAdapter | Select VMName, IPAddresses\" > {}", temp_path);
     system(cmd.c_str());
     entries->clear();
     ifstream is(temp_path);
