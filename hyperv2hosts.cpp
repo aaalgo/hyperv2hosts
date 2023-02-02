@@ -15,10 +15,10 @@ struct Entry {
     string ip;
 };
 
-void query_hyperv (vector<Entry> *entries, string const &temp_path) {
+void query_hyperv (string const &name, vector<Entry> *entries, string const &temp_path) {
     // ideally we want to get rid of the temp file
     // by using something similar to the posix popen
-    string cmd = fmt::format("powershell.exe  -command \"Get-VMNetworkAdapter -VMName linux | Select VMName, IPAddresses\" > {}", temp_path);
+    string cmd = fmt::format("powershell.exe  -command \"Get-VMNetworkAdapter -VMName {} | Select VMName, IPAddresses\" > {}", name, temp_path);
     system(cmd.c_str());
     entries->clear();
     ifstream is(temp_path);
@@ -64,10 +64,12 @@ int main (int argc, char *argv[]) {
     string output_path = "c:\\windows\\system32\\drivers\\etc\\hosts";
     string temp_path = "hyperv2hosts.tmp";
     string magic = "[HYPERV2HOSTS]";
+    string host = "linux";
     string host_fmt = "{}";
     bool dry = false;
     {
         CLI::App cli{"hyperv2hosts"};
+        cli.add_option("-n,--name", host, "host name");
         cli.add_option("-o,--output", output_path, "path to the host file");
         cli.add_option("--temp", temp_path, "temporary file containing hyperv output");
         cli.add_option("--magic", magic, "pattern used to identify added lines by this program in host file.");
@@ -77,7 +79,7 @@ int main (int argc, char *argv[]) {
     }
 
     vector<Entry> entries;
-    query_hyperv(&entries, temp_path);
+    query_hyperv(host, &entries, temp_path);
 
     vector<string> lines;
     load_hosts_lines(&lines, output_path, magic);
