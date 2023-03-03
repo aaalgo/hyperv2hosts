@@ -35,7 +35,16 @@ important fields are listed below:
 The arguments "--host-fmt vm_{}" prepends "vm_" to the guest name for
 hostname.
 
+# Additional Tips
 
+(From @upadsamay387)
+
+- If IP does not show up, one might have to install `linux-azure` on the
+  guest
+  (https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/supported-ubuntu-virtual-machines-on-hyper-v).
+- It might take a few second's delay for the IP address to be updated,
+  so add some delay for the task execution.
+- Add "--name <your guest name>" to command line. 
 
 
 
