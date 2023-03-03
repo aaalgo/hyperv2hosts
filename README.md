@@ -29,11 +29,12 @@ important fields are listed below:
 - Actions, click New...
 	* Action: Start a program.
 	* Program/script: select this program.
-	* Add arguments (optional): --host-fmt vm_{}
+	* Add arguments: `--name <guest name>`
 	* Start in: any directory, the program generates a temporary file.
 
-The arguments "--host-fmt vm_{}" prepends "vm_" to the guest name for
-hostname.
+The arguments "--host-fmt vm_{}" can be used to change the hostname
+format in the host file.  "{}" will be replaced with guest name. The
+example here will prepends "vm_" to the guest name.
 
 # Additional Tips
 
@@ -44,7 +45,6 @@ hostname.
   (https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/supported-ubuntu-virtual-machines-on-hyper-v).
 - It might take a few second's delay for the IP address to be updated,
   so add some delay for the task execution.
-- Add "--name <your guest name>" to command line. 
 
 
 
