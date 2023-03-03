@@ -21,6 +21,7 @@ straightforward:
 - 1. Use powershell to query the guest properties.  
 ```
 powershell.exe  -command \"Get-VMNetworkAdapter -VMName GUEST_NAME | Select VMName, IPAddresses\"";
+```
 - 2. Update the host file using the results.
 - 3. Bundle 1 and 2 into a script and add that to the task scheduler as
      described below.
